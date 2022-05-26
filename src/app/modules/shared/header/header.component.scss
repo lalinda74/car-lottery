@@ -1,0 +1,15 @@
+.cl-header {
+    height: 48px;
+    background-color: #a4daed;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10rem;
+    &__logo {
+        width: 100px;
+        height: 100px;
+        background-color: black;
+        color: #FFF;
+        margin-top: 24px;
+        text-align: center;
+    }
+}

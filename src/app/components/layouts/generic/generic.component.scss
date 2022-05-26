@@ -1,0 +1,9 @@
+.cl-g-layout {
+    &__body {
+        display: flex;
+        justify-content: center;
+    }
+    &__inner-body {
+        width: 33vw;
+    }
+}
