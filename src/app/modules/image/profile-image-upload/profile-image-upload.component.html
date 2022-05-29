@@ -1,0 +1,40 @@
+<form [formGroup]="imageForm">
+  <div class="video-container" *ngIf="!error">
+    <video
+      class="cl-preview"
+      [class.show]="!isCaptured"
+      [class.hide]="isCaptured"
+      #video
+      id="video"
+      autoplay
+    ></video>
+    <canvas
+      class="cl-preview"
+      [class.show]="isCaptured"
+      [class.hide]="!isCaptured"
+      #canvas
+      id="canvas"
+    ></canvas>
+  </div>
+
+  <div class="snap-container">
+    <button class="btn btn-primary" *ngIf="!isCaptured" (click)="capture()">
+      Snap Photo
+    </button>
+    <button class="btn btn-danger" *ngIf="isCaptured" (click)="removeCurrent()">
+      Take Another
+    </button>
+
+    <div *ngIf="error" class="text-danger mt-4">
+      {{ error }}
+    </div>
+  </div>
+
+  <ul class="list-unstyled">
+    <li (click)="setPhoto()">
+      <img [src]="captures" height="50" />
+    </li>
+  </ul>
+
+  <button mat-flat-button type="button" (click)="submitImage()" class="cl-btn mt--xl">SUBMIT</button>
+</form>

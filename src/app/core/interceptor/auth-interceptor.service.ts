@@ -19,6 +19,11 @@ export class AuthInterceptorService implements HttpInterceptor {
     return next.handle(this.addAuthToken(request));
   }
 
+  /**
+   * Add auth token to http requests
+   * @param request 
+   * @returns Http request
+   */
   addAuthToken(request: HttpRequest<any>) {
     const token = this.authService.getAuthToken();
 

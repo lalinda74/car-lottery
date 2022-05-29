@@ -13,8 +13,8 @@ export class AppComponent {
     if (sessionID === null) {
       sessionID = this.generateSessionID();
       localStorage.setItem('sessionID', sessionID);
+      this.router.navigate(['/contact']);
     }
-    this.router.navigate(['/contact']);
   }
 
   /**

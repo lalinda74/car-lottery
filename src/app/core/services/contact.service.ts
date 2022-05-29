@@ -7,9 +7,16 @@ import { Observable } from 'rxjs';
 })
 export class ContactService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  submitContactData(): any {
-    return this.httpClient.get('https://dummy.restapiexample.com/api/v1/employees');
+  /**
+   * Submit final data
+   * @param requestPayload Request payload that contains user data
+   * @returns 
+   */
+  submitLotteryData(requestPayload: any): any {
+    return this.http.post(`http://localhost:3000/lotteries`, requestPayload);
   }
+
+  
 }

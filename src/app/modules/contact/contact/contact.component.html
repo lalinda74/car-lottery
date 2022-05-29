@@ -1,15 +1,27 @@
 <section>
-    <h2>This is your first step for a brand new car:</h2>
-    <h2 class="mb">Please provide your e-mail address.</h2>
-    <form [formGroup]="contactForm" (submit)="submitContactData()">
-        <div>
-            <label>E-mail Address (required)</label>
-            <mat-form-field class="cl-inp" appearance="outline">
-                <input matInput type="e-mail" formControlName="emailCtrl" placeholder="E-mail Address" class="cl-inp__field1" />
-                <mat-error *ngIf="contactForm.get('emailCtrl')?.hasError('required') && contactForm.touched">Please add your e-mail.</mat-error>
-                <mat-error *ngIf="contactForm.get('emailCtrl')?.hasError('pattern') && contactForm.touched">The e-mail you entered is not correct. </mat-error>
-            </mat-form-field>
-        </div>
-        <button type="submit"class="cl-btn mt--xl">SUBMIT E-MAIL</button>
-    </form>
+  <h1 class="mb-5">This is your first step for a brand new car.</h1>
+  <form [formGroup]="contactForm" (submit)="submitContactData()">
+    <div class="mb-5">
+      <label>E-mail Address (required)</label>
+      <mat-form-field class="cl-inp" appearance="outline">
+        <input
+          matInput
+          type="e-mail"
+          formControlName="emailCtrl"
+          placeholder="E-mail Address"
+          class="cl-inp__field1"
+        />
+        <mat-icon matSuffix aria-label="e-mail">mail_outline</mat-icon>
+        <mat-error *ngIf="contactForm.get('emailCtrl')?.hasError('required')"
+          >Please add your e-mail.</mat-error
+        >
+        <mat-error *ngIf="contactForm.get('emailCtrl')?.hasError('pattern')"
+          >The e-mail you entered is not correct.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-flat-button type="submit" class="cl-btn mt--xl">
+      <span>CONTINUE</span><span class="material-icons"> arrow_forward </span>
+    </button>
+  </form>
 </section>

@@ -1,11 +1,20 @@
 .cl-btn {
     height: 3rem;
     width: 100%;
-    background-color: chocolate;
+    background-color: var(--primary);
     color: #FFF;
     border: unset;
     box-shadow: none;
     border-radius: 5px;
     text-align: left;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center;
     padding: var(--component-padding);
+    .mat-button-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

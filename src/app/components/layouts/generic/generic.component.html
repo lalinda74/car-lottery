@@ -1,13 +1,11 @@
-<main class="cl-g-layout">
-    <div>
-        <cl-header></cl-header>
-        <div class="cl-g-layout__body">
-            <div>
-                <cl-progress-bar></cl-progress-bar>
-                <div class="cl-g-layout__inner-body">
-                    <router-outlet></router-outlet>
-                </div>
-            </div>
-        </div>
+<main class="container cl-g-layout">
+  <div>
+    <cl-header></cl-header>
+    <div class="row cl-g-layout__body">
+      <div class="col-12 col-lg-5">
+        <!-- <cl-progress-bar></cl-progress-bar> -->
+        <router-outlet></router-outlet>
+      </div>
     </div>
+  </div>
 </main>
