@@ -49,7 +49,6 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getImage();
-    // this.getImageFromStore();
   }
 
   /**
