@@ -58,11 +58,6 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        canLoad: [
-          PersonalDataGuardService,
-          ImageRouterGuardService,
-          SuccessRouterGuardService,
-        ],
         loadChildren: () =>
           import('./modules/success/success.module').then(
             (m) => m.SuccessModule

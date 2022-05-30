@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -11,6 +11,8 @@ import { PersonalDataSelector } from '../../../store/selectors/personal.selector
 import { PersonalDataModel } from 'src/app/core/models/UI/personal-data.model';
 import { LotteryModel } from 'src/app/core/models/API/lottery.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as ContactActions from 'src/app/store/actions/contact.action';
+import * as PersonalInfoActions from 'src/app/store/actions/personal-info.action';
 
 @Component({
   selector: 'cl-profile-image-upload',
@@ -47,6 +49,7 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getImage();
+    // this.getImageFromStore();
   }
 
   /**
@@ -58,15 +61,11 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
       this.openSnackBar('Please upload an image of you.', 'close');
       return;
     }
-    this.store.dispatch(
-      ImageActions.SetImageAction({
-        payload: this.imageUrl,
-      })
-    );
     this.constructPayload();
     this.lotteryService.submitLotteryData(this.requestPayload).subscribe(
       (data: LotteryModel) => {
         this.router.navigate(['success', data?.id]);
+        this.clearStore();
       },
       (error: any) => {
         this.openSnackBar('An error occurred while saving lottery. Please try again.', 'close');
@@ -95,6 +94,17 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Update image in store
+   */
+  updateImageInStore(): void {
+    this.store.dispatch(
+      ImageActions.SetImageAction({
+        payload: this.imageUrl,
+      })
+    );
+  }
+
+  /**
    * Get email state from store
    */
   getContactState(): void {
@@ -119,6 +129,19 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Get image from store
+   */
+  getImageFromStore(): void {
+    this.storeSub = this.store
+      .pipe(select(ImageSelector.selectImageStringState))
+      .subscribe((imageString: string) => {
+        console.log('imageString', imageString);
+        this.imageForm?.controls['imageCtrl'].setValue(imageString);
+        this.imageUrl = imageString;
+      });
+  }
+
+  /**
    * Upload image to preview
    * @param file File
    */
@@ -133,6 +156,7 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
       this.imageForm?.controls['imageCtrl'].setValue(this.imageUrl);
     }
     reader.readAsDataURL(this.fileToUpload);
+    // this.updateImageInStore();
   }
 
   /**
@@ -147,6 +171,21 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
       horizontalPosition: 'right',
       panelClass: ['cl-message'],
     });
+  }
+
+  /**
+   * Clear store
+   */
+  clearStore(): void {
+    this.store.dispatch(
+      ContactActions.ResetContactAction()
+    );
+    this.store.dispatch(
+      PersonalInfoActions.ResetPersonalDataAction()
+    );
+    this.store.dispatch(
+      ImageActions.ResetImageAction()
+    );
   }
 
   ngOnDestroy(): void {

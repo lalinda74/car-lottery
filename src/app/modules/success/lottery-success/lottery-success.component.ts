@@ -1,13 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import * as ContactActions from 'src/app/store/actions/contact.action';
-import * as PersonalInfoActions from 'src/app/store/actions/personal-info.action';
-import * as ImageActions from 'src/app/store/actions/image.action';
-import { PersonalDataSelector } from '../../../store/selectors/personal.selector';
-import { first, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { LotteryService } from 'src/app/core/services/lottery.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { LotteryModel } from 'src/app/core/models/API/lottery.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -49,25 +44,9 @@ export class LotterySuccessComponent implements OnInit, OnDestroy {
     this.lotteryService.getLotteryData(lotterID).subscribe(
       (response: any) => {
         this.name = response.firstName + ' ' + response.middleName;
-        this.clearStore();
-        this.clearToken();
+        // this.clearToken();
       }
     )
-  }
-
-  /**
-   * Clear store
-   */
-  clearStore(): void {
-    this.store.dispatch(
-      ContactActions.ResetContactAction()
-    );
-    this.store.dispatch(
-      PersonalInfoActions.ResetPersonalDataAction()
-    );
-    this.store.dispatch(
-      ImageActions.ResetImageAction()
-    );
   }
 
   /**
