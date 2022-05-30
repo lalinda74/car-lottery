@@ -1,4 +1,4 @@
-<section class="cl-success">
+<section class="cl-success" *ngIf="showContent">
     <div>
         <div class="cl-success__icon mb-5">
             <img src="../../../../assets/images/success.gif" />
@@ -7,7 +7,8 @@
           <div class="cl-success__msg">
             <h1 class="text-center">Congratulations, {{name}}</h1>
             <h3 class="text-center">We received your information.</h3>
-            <h4 class="text-center">Your chances of winning a car is 1 out of {{lotteryCount}}</h4>
+            <h4 class="text-center" *ngIf="lotteryCount > 1">Your chances of winning a car is 1 out of {{lotteryCount}}</h4>
+            <h4 class="text-center" *ngIf="lotteryCount === 1">You are the first to enroll to this draw.</h4>
             <button mat-flat-button class="cl-btn cl-btn--rounded mt-5" routerLink="/contact">Start New</button>
           </div>
     </div>

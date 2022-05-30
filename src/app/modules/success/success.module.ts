@@ -4,6 +4,7 @@ import { SuccessRoutingModule } from './success-routing.module';
 
 // material components
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // components
 import { LotterySuccessComponent } from './lottery-success/lottery-success.component';
@@ -17,7 +18,8 @@ import { LotterySuccessComponent } from './lottery-success/lottery-success.compo
   imports: [
     CommonModule,
     SuccessRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ]
 })
 export class SuccessModule { }

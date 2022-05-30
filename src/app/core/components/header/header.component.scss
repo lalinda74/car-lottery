@@ -5,10 +5,11 @@
     justify-content: flex-start;
     margin-bottom: 3rem;
     &__logo {
+        display: flex;
+        align-items: center;
         font-size: 1.5rem;
         font-family: 'Aladin', cursive;
-        > img {
-            width: 3rem;
+        > span {
             margin-right: 0.3rem;
         }
     }

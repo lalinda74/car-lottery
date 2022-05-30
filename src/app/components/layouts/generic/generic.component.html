@@ -4,13 +4,14 @@
       <cl-banner></cl-banner>
     </div>
     <div class="col-1 col-md-3 col-lg-2"></div>
-    <div class="col-10 col-md-6 col-lg-4 pb-5 cl-g-layout__right-c">
+    <div class="col-10 col-md-6 col-lg-4 pb-5 cl-g-layout__right-c cl-transition">
       <div class="d-block d-lg-none">
         <cl-header></cl-header>
       </div>
       <div class="cl-space d-none d-lg-block"></div>
-      <!-- <cl-status></cl-status> -->
-      <router-outlet></router-outlet>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
     </div>
     <div class="col-1 col-md-3 col-lg-2"></div>
   </div>

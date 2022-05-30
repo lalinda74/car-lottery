@@ -15,7 +15,7 @@ import { ContactSelector } from 'src/app/store/selectors/contact.selector';
 export class ContactComponent implements OnInit, OnDestroy {
   contactForm!: FormGroup;
   emailRegex =
-    '^[a-zA-Z0-9]+(.[_a-zA-Z0-9]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,15})$';
+    '^[a-zA-Z0-9.!#$%&*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+\\.[a-z0-9]{1,}$';
 
   storeSub!: Subscription;
 
@@ -42,7 +42,7 @@ export class ContactComponent implements OnInit, OnDestroy {
    */
   submitContactData(): void {
     if (this.contactForm.status === 'INVALID') {
-      // this.openSnackBar('Please enter an valid e-mail.', 'close');
+      this.openSnackBar('Please enter an valid e-mail.', 'close');
       return;
     }
     this.store.dispatch(
