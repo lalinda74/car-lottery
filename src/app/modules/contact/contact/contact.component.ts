@@ -50,7 +50,7 @@ export class ContactComponent implements OnInit, OnDestroy {
         payload: this.contactForm.controls?.['emailCtrl'].value,
       })
     );
-    this.router.navigate(['/personal']);
+    this.router.navigate(['/personal'], { replaceUrl: true });
   }
 
   /**

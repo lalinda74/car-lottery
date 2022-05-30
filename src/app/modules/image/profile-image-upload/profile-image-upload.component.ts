@@ -64,7 +64,7 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
     this.constructPayload();
     this.lotteryService.submitLotteryData(this.requestPayload).subscribe(
       (data: LotteryModel) => {
-        this.router.navigate(['success', data?.id]);
+        this.router.navigate(['success', data?.id], { replaceUrl: true });
         this.clearStore();
       },
       (error: any) => {

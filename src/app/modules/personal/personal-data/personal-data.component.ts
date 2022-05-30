@@ -46,7 +46,7 @@ export class PersonalDataComponent implements OnInit, OnDestroy {
         dob: this.personalForm.controls?.['dobCtrl'].value,
       })
     );
-    this.router.navigate(['image-upload']);
+    this.router.navigate(['image-upload'], { replaceUrl: true });
   }
 
   /**

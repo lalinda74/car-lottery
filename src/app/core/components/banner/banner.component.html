@@ -1,6 +1,5 @@
 <div class="cl-bg-image">
-  <!-- <img src="../../../../assets//images/slider-1.jpeg" alt="slider image" /> -->
-  <div class="cl-bg-image__msg">
+  <div class="cl-bg-image__msg cl-transition">
     <cl-header></cl-header>
     <h1 class="mb-5">Own a brand new car <br/>with 3 quick steps.</h1>
     <ul>
@@ -10,7 +9,7 @@
             check_circle
           </span>
           <span class="material-icons cl-circle" *ngIf="!isStepOneCompleted">
-            subject
+            arrow_forward
           </span>
           <span>
             <h3>Step 1</h3>
@@ -24,7 +23,7 @@
             check_circle
           </span>
           <span class="material-icons cl-circle" *ngIf="!isStepTwoCompleted">
-            subject
+            arrow_forward
           </span>
           <span>
             <h3>Step 2</h3>
@@ -38,7 +37,7 @@
             check_circle
           </span>
           <span class="material-icons cl-circle" *ngIf="!isStepThreeCompleted">
-            subject
+            arrow_forward
           </span>
           <span>
             <h3>Step 3</h3>
