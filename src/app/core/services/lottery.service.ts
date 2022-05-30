@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { LotteryModel } from '../models/API/lottery.model';
 
 @Injectable({
@@ -16,7 +17,7 @@ export class LotteryService {
    * @returns Observable
    */
   submitLotteryData(requestPayload: LotteryModel): Observable<LotteryModel> {
-    return this.http.post(`http://localhost:3000/lotteries`, requestPayload).pipe(
+    return this.http.post(environment.baseURL + `/lotteries`, requestPayload).pipe(
       map((response: any) => {
         return response;
       })
@@ -28,7 +29,7 @@ export class LotteryService {
    * @returns Observable
    */
   getLotteryCount(): Observable<number> {
-    return this.http.get(`http://localhost:3000/lotteries`).pipe(
+    return this.http.get(environment.baseURL + `/lotteries`).pipe(
       map((response: any) => {
         return response.length;
       })
@@ -42,7 +43,7 @@ export class LotteryService {
    */
   checkEmailExist(email: string): Observable<any> {
     let isEmailExists = false;
-    return this.http.get(`http://localhost:3000/lotteries`);
+    return this.http.get(environment.baseURL + `/lotteries`);
   }
 
   /**
@@ -50,7 +51,7 @@ export class LotteryService {
    * @returns Observable
    */
    getLotteryData(lotteryID: number): Observable<number> {
-    return this.http.get(`http://localhost:3000/lotteries/` + lotteryID).pipe(
+    return this.http.get(environment.baseURL + `/lotteries/` + lotteryID).pipe(
       map((response: any) => {
         return response;
       })
