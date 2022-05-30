@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { LotteryModel } from 'src/app/core/models/API/lottery.model';
+import { LotteryService } from 'src/app/core/services/lottery.service';
 import * as ContactActions from 'src/app/store/actions/contact.action';
 import { ContactSelector } from 'src/app/store/selectors/contact.selector';
 
@@ -23,7 +25,8 @@ export class ContactComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private router: Router,
     private store: Store,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private lotteryService: LotteryService
   ) {
     this.contactForm = this.formBuilder.group({
       emailCtrl: [
@@ -45,12 +48,41 @@ export class ContactComponent implements OnInit, OnDestroy {
       this.openSnackBar('Please enter an valid e-mail.', 'close');
       return;
     }
-    this.store.dispatch(
-      ContactActions.SetContactAction({
-        payload: this.contactForm.controls?.['emailCtrl'].value,
-      })
+    else {
+      this.checkEmailExists(this.contactForm.controls?.['emailCtrl'].value);
+    }
+    
+  }
+
+  /**
+   * Check email is exists in the backend
+   * @TODO Checking email exists going through the whole array temporirily since there is no proper API
+   * @param newEmail Email
+   */
+  checkEmailExists(newEmail: string): void {
+    let isEmailExists = false;
+    this.lotteryService.checkEmailExist(this.contactForm.controls?.['emailCtrl'].value).subscribe(
+      (response: any) => {
+        response.forEach((element: LotteryModel) => {
+          if (newEmail === element.email) {
+            isEmailExists = true;
+          }
+        });
+        if (isEmailExists) {
+          this.openSnackBar('You have already entered with this e-mail', 'close');
+        } else {
+          this.store.dispatch(
+            ContactActions.SetContactAction({
+              payload: newEmail,
+            })
+          );
+          this.router.navigate(['/personal'], { replaceUrl: true });
+        }
+      },
+      (error: any) => {
+        this.openSnackBar('Something unexpected happened. Please try again.', 'close');
+      }
     );
-    this.router.navigate(['/personal'], { replaceUrl: true });
   }
 
   /**

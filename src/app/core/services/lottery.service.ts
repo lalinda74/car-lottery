@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { LotteryModel } from '../models/API/lottery.model';
 
 @Injectable({
@@ -33,6 +33,17 @@ export class LotteryService {
         return response.length;
       })
     );
+  }
+
+  /**
+   * @TODO Check email exists going through the whole array since there is no proper API
+   * @param email 
+   * @returns Observable
+   */
+  checkEmailExist(email: string): Observable<any> {
+    let isEmailExists = false;
+    console.log('email', email);
+    return this.http.get(`http://localhost:3000/lotteries`);
   }
 
   /**
