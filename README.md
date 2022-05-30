@@ -7,8 +7,9 @@ Technologies and tools:
 - [ ] Angular Material
 - [ ] Bootstrap 5
 
-## Development server
+## Running the application 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
-
-To run the mock back-end served, run `npm run mock:server` in a console.
+- [ ] First, run `npm i` in the root folder of the project.
+- [ ] Then, run `ng serve` to start the dev server.
+- [ ] To run the mock backend server, run `npm run mock:server` in a new console.
+- [ ] Navigate to `http://localhost:4200/`
