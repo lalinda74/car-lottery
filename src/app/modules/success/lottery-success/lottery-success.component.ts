@@ -75,7 +75,7 @@ export class LotterySuccessComponent implements OnInit, OnDestroy {
         this.lotteryCount = data;
       },
       (error: any) => {
-        console.log('an error occurred');
+        this.openSnackBar('An error occurred getting data. Please try again.', 'close');
       }
     );
   }

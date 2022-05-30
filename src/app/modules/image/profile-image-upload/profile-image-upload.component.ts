@@ -134,7 +134,6 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
     this.storeSub = this.store
       .pipe(select(ImageSelector.selectImageStringState))
       .subscribe((imageString: string) => {
-        console.log('imageString', imageString);
         this.imageForm?.controls['imageCtrl'].setValue(imageString);
         this.imageUrl = imageString;
       });

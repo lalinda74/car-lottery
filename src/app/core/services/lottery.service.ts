@@ -42,7 +42,6 @@ export class LotteryService {
    */
   checkEmailExist(email: string): Observable<any> {
     let isEmailExists = false;
-    console.log('email', email);
     return this.http.get(`http://localhost:3000/lotteries`);
   }
 
