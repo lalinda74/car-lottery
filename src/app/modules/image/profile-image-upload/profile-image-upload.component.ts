@@ -3,11 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { ContactService } from 'src/app/core/services/contact.service';
+import { LotteryService } from 'src/app/core/services/lottery.service';
 import * as ImageActions from '../../../store/actions/image.action';
 import { ImageSelector } from '../../../store/selectors/image.selector';
 import { ContactSelector } from '../../../store/selectors/contact.selector';
 import { PersonalDataSelector } from '../../../store/selectors/personal.selector';
+import { PersonalDataModel } from 'src/app/core/models/UI/personal-data.model';
+import { LotteryModel } from 'src/app/core/models/API/lottery.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'cl-profile-image-upload',
@@ -18,19 +21,7 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
 
   imageForm: FormGroup;
 
-  WIDTH = 400;
-  HEIGHT = 400;
-
-  @ViewChild('video') public video!: ElementRef;
-
-  @ViewChild('canvas') public canvas!: ElementRef;
-
-  stream: any;
-  captures: string = '';
-  error: any;
-  isCaptured!: boolean;
-
-  requestPayload = {
+  requestPayload: LotteryModel = {
     email: '',
     firstName: '',
     middleName: '',
@@ -38,12 +29,16 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
     image: ''
   };
 
+  fileToUpload!: any;
+  imageUrl = '../../../../assets/images/img-preview.png';
+
   storeSub!: Subscription;
 
   constructor(
     private store: Store,
     private formBuilder: FormBuilder,
-    private contactService: ContactService,
+    private lotteryService: LotteryService,
+    private snackBar: MatSnackBar,
     private router: Router) {
     this.imageForm = this.formBuilder.group({
       imageCtrl: ['', [Validators.required]]
@@ -51,54 +46,7 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getEmail();
-  }
-
-  async ngAfterViewInit() {
-    await this.setupDevices();
-  }
-
-  async setupDevices() {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      try {
-        this.stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-        });
-        if (this.stream) {
-          this.video.nativeElement.srcObject = this.stream;
-          this.video.nativeElement.play();
-          this.error = null;
-        } else {
-          this.error = 'You have no output video device';
-        }
-      } catch (e) {
-        this.error = e;
-      }
-    }
-  }
-
-  capture() {
-    this.drawImageToCanvas(this.video?.nativeElement);
-    this.captures = this.canvas.nativeElement.toDataURL('image/png');
-    this.imageForm.controls['imageCtrl'].setValue(this.captures);
-    this.isCaptured = true;
-  }
-
-  removeCurrent() {
-    this.isCaptured = false;
-  }
-
-  setPhoto() {
-    this.isCaptured = true;
-    var image = new Image();
-    image.src = this.captures;
-    this.drawImageToCanvas(image);
-  }
-
-  drawImageToCanvas(image: any) {
-    this.canvas.nativeElement
-      .getContext('2d')
-      .drawImage(image, 0, 0, this.WIDTH, this.HEIGHT);
+    this.getImage();
   }
 
   /**
@@ -107,17 +55,16 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
    */
   submitImage(): void {
     if (this.imageForm.status === 'INVALID') {
+      this.openSnackBar('Please enter an valid e-mail.', 'close');
       return;
     }
     this.store.dispatch(
       ImageActions.SetImageAction({
-        payload: this.captures,
+        payload: this.imageUrl,
       })
     );
-    this.getContactState();
-    this.getPersonalDataState();
-    this.requestPayload.image = this.captures;
-    this.contactService.submitLotteryData(this.requestPayload).subscribe(
+    this.constructPayload();
+    this.lotteryService.submitLotteryData(this.requestPayload).subscribe(
       (data: any) => {
         this.router.navigate(['success']);
       },
@@ -128,20 +75,28 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Construct request payload
+   */
+  constructPayload(): void {
+    this.getContactState();
+    this.getPersonalDataState();
+    this.requestPayload.image = this.imageUrl;
+  }
+
+  /**
    * Listen to image from store
    */
-  getEmail(): void {
+  getImage(): void {
     this.storeSub = this.store
       .pipe(select(ImageSelector.selectImageStringState))
       .subscribe((response: string) => {
-        this.captures = response;
-        this.capture();
-        this.setPhoto();
         this.imageForm?.controls['imageCtrl'].setValue(response);
-        this.isCaptured = true;
       });
   }
 
+  /**
+   * Get email state from store
+   */
   getContactState(): void {
     this.storeSub = this.store
       .pipe(select(ContactSelector.selectEmailState))
@@ -150,21 +105,53 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Get personal data state from store
+   */
   getPersonalDataState(): void {
     this.storeSub = this.store
       .pipe(select(PersonalDataSelector.selectPersonalInfoState))
-      .subscribe((personalDataResponse: any) => {
+      .subscribe((personalDataResponse: PersonalDataModel) => {
         this.requestPayload.firstName = personalDataResponse.firstName;
         this.requestPayload.middleName = personalDataResponse.middleName;
         this.requestPayload.dob = personalDataResponse.dob;
       });
   }
 
+  /**
+   * Upload image to preview
+   * @param file File
+   */
+  handleFileInput(file: any) {
+    const file1= file.target?.files;
+    this.fileToUpload = file1.item(0);
+
+    //Show image preview
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result;
+      this.imageForm?.controls['imageCtrl'].setValue(this.imageUrl);
+    }
+    reader.readAsDataURL(this.fileToUpload);
+  }
+
+  /**
+   * Open notification message
+   * @param message content
+   * @param action action name
+   */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 500000000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: ['cl-message'],
+  });
+  }
+
   ngOnDestroy(): void {
-    this.stream.getTracks().forEach(function(track: any) {
-      if (track.readyState == 'live') {
-          track.stop();
-      }
-    });
+    if (this.storeSub) {
+      this.storeSub.unsubscribe();
+    }
   }
 }

@@ -6,7 +6,7 @@ import { ContactRoutingModule } from './contact-routing.module';
 // angular material
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // components
 import { ContactComponent } from './contact/contact.component';
@@ -21,7 +21,7 @@ import { ContactComponent } from './contact/contact.component';
     ContactRoutingModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatSnackBarModule
   ]
 })
 export class ContactModule { }

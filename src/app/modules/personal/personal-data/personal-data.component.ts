@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { PersonalDataModel } from 'src/app/core/models/UI/personal-data.model';
 import * as PersonalDataActions from '../../../store/actions/personal-info.action';
 import { PersonalDataSelector } from '../../../store/selectors/personal.selector';
 
@@ -54,7 +55,7 @@ export class PersonalDataComponent implements OnInit, OnDestroy {
   getPersonalData(): void {
     this.storeSub = this.store
       .pipe(select(PersonalDataSelector.selectPersonalInfoState))
-      .subscribe((response: any) => {
+      .subscribe((response: PersonalDataModel) => {
         this.personalForm?.controls['firstNameCtrl'].setValue(response.firstName);
         this.personalForm?.controls['secondNameCtrl'].setValue(response.middleName);
         this.personalForm?.controls['dobCtrl'].setValue(response.dob);

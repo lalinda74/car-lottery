@@ -1,40 +1,14 @@
 <form [formGroup]="imageForm">
-  <div class="video-container" *ngIf="!error">
-    <video
-      class="cl-preview"
-      [class.show]="!isCaptured"
-      [class.hide]="isCaptured"
-      #video
-      id="video"
-      autoplay
-    ></video>
-    <canvas
-      class="cl-preview"
-      [class.show]="isCaptured"
-      [class.hide]="!isCaptured"
-      #canvas
-      id="canvas"
-    ></canvas>
+  <h1 class="mb-5 text-center">We need an image of you.</h1>
+  <div class="cl-img-preview mb-4">
+    <img width="100%" [src]="imageUrl" class="cl-img-preview__img" />
   </div>
-
-  <div class="snap-container">
-    <button class="btn btn-primary" *ngIf="!isCaptured" (click)="capture()">
-      Snap Photo
-    </button>
-    <button class="btn btn-danger" *ngIf="isCaptured" (click)="removeCurrent()">
-      Take Another
-    </button>
-
-    <div *ngIf="error" class="text-danger mt-4">
-      {{ error }}
-    </div>
+  <div class="d-flex justify-content-center">
+    <span class="cl-btn cl-btn--rounded cl-btn__file" role="button">
+      Upload Image<input #Image type="file" (change)="handleFileInput($event)" accept="image/png, image/gif, image/jpeg" />
+    </span>
   </div>
-
-  <ul class="list-unstyled">
-    <li (click)="setPhoto()">
-      <img [src]="captures" height="50" />
-    </li>
-  </ul>
-
-  <button mat-flat-button type="button" (click)="submitImage()" class="cl-btn mt--xl">SUBMIT</button>
+  <button mat-flat-button type="button" (click)="submitImage()" class="cl-btn cl-btn--full mt-5">
+    <span>SUBMIT</span><span class="material-icons"> arrow_forward </span>
+  </button>
 </form>

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -14,14 +15,15 @@ import { ContactSelector } from 'src/app/store/selectors/contact.selector';
 export class ContactComponent implements OnInit, OnDestroy {
   contactForm!: FormGroup;
   emailRegex =
-    '^[a-z0-9]+(.[_a-z0-9]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,15})$';
+    '^[a-zA-Z0-9]+(.[_a-zA-Z0-9]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,15})$';
 
   storeSub!: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private snackBar: MatSnackBar
   ) {
     this.contactForm = this.formBuilder.group({
       emailCtrl: [
@@ -36,10 +38,11 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Submit contact data via API
+   * Submit contact data to store and redirect to next step
    */
   submitContactData(): void {
     if (this.contactForm.status === 'INVALID') {
+      // this.openSnackBar('Please enter an valid e-mail.', 'close');
       return;
     }
     this.store.dispatch(
@@ -59,6 +62,20 @@ export class ContactComponent implements OnInit, OnDestroy {
       .subscribe((response: string) => {
         this.contactForm?.controls['emailCtrl'].setValue(response);
       });
+  }
+
+  /**
+   * Open notification message
+   * @param message content
+   * @param action action name
+   */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 500000000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: ['cl-message'],
+  });
   }
 
   ngOnDestroy(): void {

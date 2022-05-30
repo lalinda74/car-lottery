@@ -1,20 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ContactService } from './services/contact.service';
-import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+
+// angular material
+import { MatButtonModule } from '@angular/material/button';
+
+// components
+import { HeaderComponent } from './components/header/header.component';
+import { BannerComponent } from './components/banner/banner.component';
+import { StatusComponent } from './components/status/status.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
   declarations: [
-    ProgressBarComponent
+    HeaderComponent,
+    BannerComponent,
+    StatusComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule
   ],
   exports: [
-    ProgressBarComponent
+    HeaderComponent,
+    BannerComponent,
+    StatusComponent,
+    PageNotFoundComponent
   ]
 })
 export class CoreModule { }

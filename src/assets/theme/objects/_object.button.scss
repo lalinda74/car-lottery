@@ -1,20 +1,50 @@
 .cl-btn {
     height: 3rem;
-    width: 100%;
-    background-color: var(--primary);
-    color: #FFF;
-    border: unset;
-    box-shadow: none;
-    border-radius: 5px;
-    text-align: left;
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center;
-    padding: var(--component-padding);
-    .mat-button-wrapper {
+    &--full {
         width: 100%;
-        display: flex;
-        justify-content: space-between;
+        background-color: var(--primary);
+        color: #FFF;
+        display: flex !important;
+        justify-content: space-between !important;
         align-items: center;
+        .mat-button-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    &--rounded {
+        width: 30%;
+        border-radius: 24px !important;
+        background-color: var(--primary);
+        color: var(--white);
+    }
+    &__file {
+        width: 40% !important;
+        position: relative;
+        overflow: hidden;
+        background-color: #FFF;
+        border: 1px solid #d4d4d4;
+        border-radius: 24px;
+        color: #000;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center;
+        input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
     }
 }

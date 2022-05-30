@@ -1,0 +1,52 @@
+<div class="cl-bg-image">
+  <!-- <img src="../../../../assets//images/slider-1.jpeg" alt="slider image" /> -->
+  <div class="cl-bg-image__msg">
+    <cl-header></cl-header>
+    <h1 class="mb-5">Own a brand new car <br/>with 3 quick steps.</h1>
+    <ul>
+      <li class="mb-3">
+        <div class="d-flex">
+          <span class="material-icons cl-circle" *ngIf="isStepOneCompleted">
+            check_circle
+          </span>
+          <span class="material-icons cl-circle" *ngIf="!isStepOneCompleted">
+            subject
+          </span>
+          <span>
+            <h3>Step 1</h3>
+            <h4>Enter contact details.</h4>
+          </span>
+        </div>
+      </li>
+      <li class="mb-3">
+        <div class="d-flex">
+          <span class="material-icons cl-circle" *ngIf="isStepTwoCompleted">
+            check_circle
+          </span>
+          <span class="material-icons cl-circle" *ngIf="!isStepTwoCompleted">
+            subject
+          </span>
+          <span>
+            <h3>Step 2</h3>
+            <h4>Enter your personal information.</h4>
+          </span>
+        </div>
+      </li>
+      <li class="mb-3">
+        <div class="d-flex">
+          <span class="material-icons cl-circle" *ngIf="isStepThreeCompleted">
+            check_circle
+          </span>
+          <span class="material-icons cl-circle" *ngIf="!isStepThreeCompleted">
+            subject
+          </span>
+          <span>
+            <h3>Step 3</h3>
+            <h4>Upload an image of yours.</h4>
+          </span>
+        </div>
+        <h1 *ngIf="isStepThreeCompleted">Done</h1>
+      </li>
+    </ul>
+  </div>
+</div>

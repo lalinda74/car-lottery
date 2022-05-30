@@ -1,9 +1,9 @@
 <section>
-  <h1 class="mb-5">We need to know you well</h1>
+  <h1 class="mb-5">Fill the below fields.</h1>
   <form [formGroup]="personalForm" (submit)="submitPersonalData()">
-    <div class="mb-3">
-      <label>First name (required)</label>
-      <mat-form-field class="cl-inp" appearance="outline">
+    <div class="mb-3 cl-inp">
+      <label class="cl-inp__lbl">First name (required)</label>
+      <mat-form-field appearance="outline">
         <input
           matInput
           type="e-mail"
@@ -11,16 +11,15 @@
           placeholder="First Name"
           class="cl-inp__field1"
         />
-        <mat-icon matSuffix aria-label="e-mail">person_outline</mat-icon>
         <mat-error
           *ngIf="personalForm.get('firstNameCtrl')?.hasError('required')"
           >Please enter first name.</mat-error
         >
       </mat-form-field>
     </div>
-    <div class="mb-3">
-      <label>Second name (required)</label>
-      <mat-form-field class="cl-inp" appearance="outline">
+    <div class="mb-3 cl-inp">
+      <label class="cl-inp__lbl">Second name (required)</label>
+      <mat-form-field appearance="outline">
         <input
           matInput
           type="e-mail"
@@ -28,16 +27,15 @@
           placeholder="Second Name"
           class="cl-inp__field1"
         />
-        <mat-icon matSuffix aria-label="e-mail">person_outline</mat-icon>
         <mat-error
           *ngIf="personalForm.get('secondNameCtrl')?.hasError('required')"
           >Please enter second name.</mat-error
         >
       </mat-form-field>
     </div>
-    <div class="mb-5">
-      <label>Date of Birth (required)</label>
-      <mat-form-field class="cl-inp" appearance="outline">
+    <div class="mb-5 cl-inp">
+      <label class="cl-inp__lbl">Date of Birth (required)</label>
+      <mat-form-field appearance="outline">
         <input
           matInput
           [matDatepicker]="picker"
@@ -54,7 +52,7 @@
         >
       </mat-form-field>
     </div>
-    <button mat-flat-button type="submit" class="cl-btn mt--xl">
+    <button mat-flat-button type="submit" class="cl-btn cl-btn--full mt--xl">
       <span>CONTINUE</span><span class="material-icons"> arrow_forward </span>
     </button>
   </form>

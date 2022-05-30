@@ -1,0 +1,21 @@
+.cl-header {
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    &__logo {
+        font-size: 1.5rem;
+        font-family: 'Aladin', cursive;
+        > img {
+            width: 3rem;
+            margin-right: 0.3rem;
+        }
+    }
+}
+
+/* large screens */
+@media (min-width: 991px) {
+    .cl-header {
+        margin-bottom: 3rem;
+    }
+}

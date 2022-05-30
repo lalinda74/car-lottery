@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'cl-generic',
   templateUrl: './generic.component.html',
-  styleUrls: ['./generic.component.scss']
+  styleUrls: ['./generic.component.scss'],
 })
-export class GenericComponent implements OnInit {
+export class GenericComponent {
+  isStepOneCompleted = false;
+  isStepTwoCompleted = false;
+  isStepThreeCompleted = false;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor() {}
 }

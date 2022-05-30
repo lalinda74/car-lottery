@@ -1,11 +1,16 @@
-<main class="container cl-g-layout">
-  <div>
-    <cl-header></cl-header>
-    <div class="row cl-g-layout__body">
-      <div class="col-12 col-lg-5">
-        <!-- <cl-progress-bar></cl-progress-bar> -->
-        <router-outlet></router-outlet>
-      </div>
+<main class="container-fluid cl-g-layout g-0">
+  <div class="row g-0">
+    <div class="d-none d-lg-block col-lg-4">
+      <cl-banner></cl-banner>
     </div>
+    <div class="col-1 col-md-2"></div>
+    <div class="col-10 col-md-8 col-lg-4 pb-5 cl-g-layout__right-c">
+      <div class="d-block d-lg-none">
+        <cl-header></cl-header>
+      </div>
+      <cl-status></cl-status>
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-1 col-md-2"></div>
   </div>
 </main>

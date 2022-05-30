@@ -11,7 +11,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { effects, metaReducers, appReducers } from './store';
 
 // modules
-import { SharedModule } from './modules/shared/shared.module';
 import { CoreModule } from './core/core.module';
 
 // componenents
@@ -35,7 +34,6 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
 
     // modules
-    SharedModule,
     CoreModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(appReducers, { metaReducers }),

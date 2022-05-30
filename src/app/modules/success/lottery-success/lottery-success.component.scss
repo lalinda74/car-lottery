@@ -1,0 +1,26 @@
+
+
+.cl-success {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    &__icon {
+        display: flex;
+        justify-content: center;
+        width: 80vw;
+    }
+    &__msg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -20%;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    .cl-success__icon {
+        height: 40vh; 
+        margin-top: 6rem;
+    }
+}

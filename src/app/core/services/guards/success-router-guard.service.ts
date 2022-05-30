@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad } from '@angular/router';
+import { CanLoad, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { ImageSelector } from 'src/app/store/selectors/image.selector';
@@ -9,17 +9,24 @@ import { ImageSelector } from 'src/app/store/selectors/image.selector';
 })
 export class SuccessRouterGuardService implements CanLoad {
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private router: Router) { }
 
   canLoad(): Observable<boolean> {
-    return this.getEmailState();
+    return this.getImageIsSetState();
   }
 
-  getEmailState(): Observable<boolean> {
+  /**
+   * Get image is uploaded or not
+   * @returns Observable
+   */
+  getImageIsSetState(): Observable<boolean> {
     return this.store
       .pipe(
         select(ImageSelector.selectImageIsSet),
         map((status: boolean) => {
+          if (status === false) {
+            this.router.navigate(['error']);
+          }
           return status;
         })
       );

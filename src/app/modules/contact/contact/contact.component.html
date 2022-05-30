@@ -1,9 +1,9 @@
 <section>
-  <h1 class="mb-5">This is your first step for a brand new car.</h1>
+  <h1 class="mb-5">Let's get started.</h1>
   <form [formGroup]="contactForm" (submit)="submitContactData()">
-    <div class="mb-5">
-      <label>E-mail Address (required)</label>
-      <mat-form-field class="cl-inp" appearance="outline">
+    <div class="mb-5 cl-inp">
+      <label class="cl-inp__lbl">E-mail Address (required)</label>
+      <mat-form-field appearance="outline">
         <input
           matInput
           type="e-mail"
@@ -11,7 +11,6 @@
           placeholder="E-mail Address"
           class="cl-inp__field1"
         />
-        <mat-icon matSuffix aria-label="e-mail">mail_outline</mat-icon>
         <mat-error *ngIf="contactForm.get('emailCtrl')?.hasError('required')"
           >Please add your e-mail.</mat-error
         >
@@ -20,7 +19,7 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <button mat-flat-button type="submit" class="cl-btn mt--xl">
+    <button mat-flat-button type="submit" class="cl-btn cl-btn--full">
       <span>CONTINUE</span><span class="material-icons"> arrow_forward </span>
     </button>
   </form>
