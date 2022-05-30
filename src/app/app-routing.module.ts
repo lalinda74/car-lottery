@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GenericComponent } from './components/layouts/generic/generic.component';
+import { GenericComponent } from './layouts/generic/generic.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { ImageRouterGuardService } from './core/services/guards/image-router-guard.service';
 

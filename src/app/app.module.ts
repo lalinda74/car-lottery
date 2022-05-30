@@ -15,7 +15,7 @@ import { CoreModule } from './core/core.module';
 
 // componenents
 import { AppComponent } from './app.component';
-import { GenericComponent } from './components/layouts/generic/generic.component';
+import { GenericComponent } from './layouts/generic/generic.component';
 
 // services
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
