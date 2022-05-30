@@ -8,7 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
 // components
 import { HeaderComponent } from './components/header/header.component';
 import { BannerComponent } from './components/banner/banner.component';
-import { StatusComponent } from './components/status/status.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
@@ -16,7 +15,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
   declarations: [
     HeaderComponent,
     BannerComponent,
-    StatusComponent,
     PageNotFoundComponent
   ],
   imports: [
@@ -27,7 +25,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
   exports: [
     HeaderComponent,
     BannerComponent,
-    StatusComponent,
     PageNotFoundComponent
   ]
 })

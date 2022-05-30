@@ -71,7 +71,7 @@ export class ContactComponent implements OnInit, OnDestroy {
    */
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 500000000,
+      duration: 5000,
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: ['cl-message'],

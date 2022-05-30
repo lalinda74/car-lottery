@@ -1,5 +1,4 @@
 import { ActionReducerMap, MetaReducer } from "@ngrx/store";
-// import { ContactEffect } from "./effects/contact.effect";
 import { ContactReducer, ContactState } from "./reducers/contact.reducer";
 import { PersonalDataReducer, PersonalDataState } from "./reducers/personal.reducer";
 import { ImageReducer, ImageState } from "./reducers/image.reducer";
@@ -22,5 +21,4 @@ export const metaReducers: MetaReducer[] = [
 ];
 
 export const effects = [
-    // ContactEffect
 ]

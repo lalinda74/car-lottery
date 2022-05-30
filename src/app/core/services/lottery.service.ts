@@ -35,5 +35,15 @@ export class LotteryService {
     );
   }
 
-  
+  /**
+   * Get a particula lottery data
+   * @returns Observable
+   */
+   getLotteryData(lotteryID: number): Observable<number> {
+    return this.http.get(`http://localhost:3000/lotteries/` + lotteryID).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
 }

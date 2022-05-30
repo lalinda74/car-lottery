@@ -10,4 +10,8 @@ export class AuthService {
   getAuthToken(): string | null {
     return localStorage.getItem('sessionID');
   }
+
+  removeToken(): void {
+    localStorage.removeItem('sessionID');
+  }
 }

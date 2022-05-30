@@ -54,7 +54,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'success',
+    path: 'success/:lotteryID',
     children: [
       {
         path: '',

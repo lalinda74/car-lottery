@@ -55,7 +55,7 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
    */
   submitImage(): void {
     if (this.imageForm.status === 'INVALID') {
-      this.openSnackBar('Please enter an valid e-mail.', 'close');
+      this.openSnackBar('Please upload an image of you.', 'close');
       return;
     }
     this.store.dispatch(
@@ -65,11 +65,11 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
     );
     this.constructPayload();
     this.lotteryService.submitLotteryData(this.requestPayload).subscribe(
-      (data: any) => {
-        this.router.navigate(['success']);
+      (data: LotteryModel) => {
+        this.router.navigate(['success', data?.id]);
       },
       (error: any) => {
-        console.log('an error occurred');
+        this.openSnackBar('An error occurred while saving lottery. Please try again.', 'close');
       }
     );
   }
@@ -142,11 +142,11 @@ export class ProfileImageUploadComponent implements OnInit, OnDestroy {
    */
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 500000000,
+      duration: 5000,
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: ['cl-message'],
-  });
+    });
   }
 
   ngOnDestroy(): void {
